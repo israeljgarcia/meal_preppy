@@ -1,12 +1,11 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from models.Shared import db
 
 
-class Pantry(db.model):
+class Pantry(db.Model):
     """
     A class to represent a Pantry table in the SQL database
     Each User can only have one pantry
+    A pantry points to an ingredients list
     ...
 
     Columns
@@ -15,10 +14,6 @@ class Pantry(db.model):
         A unique identifier for the Pantry
     user_id: int
         The id of the user this Pantry belongs to
-    item_name: string
-        The name of the item in this Pantry
-    quantity: int
-        The amount of a certain item in the Pantry
 
     ...
 
@@ -38,13 +33,22 @@ class Pantry(db.model):
         nullable=False
     )
 
-    item_name = db.Column(
-        db.String(25),
-        nullable=False
-    )
+    ingredients = db.relationship("PantryIngredient", backref="pantrys")
 
-    quanity = db.Column(
-        db.Integer,
-        nullable=False,
-        unique=True
-    )
+    @classmethod
+    def createPantry(cls, user_id):
+        """Creates a new Pantry on the database
+
+        Args:
+            user_id(int): the user that this pantry belongs to
+            ingredients_id(int): The id to the ingredients list
+
+        Returns:
+            Pantry(Object)
+        """
+        pantry = Pantry(
+            user_id=user_id
+        )
+
+        db.session.add(pantry)
+        return pantry

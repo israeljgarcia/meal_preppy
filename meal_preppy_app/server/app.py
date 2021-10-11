@@ -1,19 +1,23 @@
 # server/app.py
 import os
-from typing import List
 
 # Flask imports
-from flask import Flask, jsonify, request
+from flask import Flask
 from flask_cors import CORS
 from flask_debugtoolbar import DebugToolbarExtension
 
 # Database imports
-from sqlalchemy import SQLAlchemy
-from models import List, Pantry, User
+from models.Shared import db, connect_db
+from models.GroceryList import GroceryList
+from models.GroceryIngredient import GroceryIngredient
+from models.Pantry import Pantry
+from models.User import User
+from models.PantryIngredient import PantryIngredient
 
 # Routes imports
 from routes.user_blueprint import user_blueprint
 from routes.api_blueprint import api_blueprint
+from routes.pantry_blueprint import pantry_blueprint
 
 # Config
 app = Flask(__name__)
@@ -26,24 +30,19 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 toolbar = DebugToolbarExtension(app)
 
 # Database setup
-db = SQLAlchemy()
-
-
-def connect_db(app):
-    """Connect this database to provided Flask app.
-    """
-
-    db.app = app
-    db.init_app(app)
-
-
 connect_db(app)
 
 # Routes
 app.register_blueprint(user_blueprint, url_prefix="/users")
 app.register_blueprint(api_blueprint, url_prefix="/api")
+app.register_blueprint(pantry_blueprint, url_prefix="/pantry")
 
-CORS(app)
+CORS(app, supports_credentials=True)
+
+
+@app.route('/')
+def home():
+    return "Home"
 
 
 # @app.route('/courses', methods=['GET', 'POST'])

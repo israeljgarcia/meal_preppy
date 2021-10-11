@@ -1,9 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from models.Shared import db
 
 
-class List(db.model):
+class GroceryList(db.Model):
     """
     A class to represent a List table in the SQL database
     Each User can have multiple lists, each List has one User
@@ -25,7 +23,7 @@ class List(db.model):
     Methods
     -------
     """
-    __tablename__ = "lists"
+    __tablename__ = "grocerylists"
 
     id = db.Column(
         db.Integer,
@@ -38,13 +36,4 @@ class List(db.model):
         nullable=False
     )
 
-    item_name = db.Column(
-        db.String(25),
-        nullable=False
-    )
-
-    quanity = db.Column(
-        db.Integer,
-        nullable=False,
-        unique=True
-    )
+    ingredients = db.relationship("GroceryIngredient", backref="GroceryList")
