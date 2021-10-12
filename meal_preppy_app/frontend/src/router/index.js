@@ -6,8 +6,14 @@ import Pantry from '../views/Pantry.vue';
 import PantryIngredientForm from '../views/PantryIngredientForm.vue';
 import LoginForm from '../views/LoginForm.vue';
 import Home from '../views/Home.vue';
+import Index from '../views/Index.vue';
 
 const routes = [
+  {
+    path: '/',
+    name: 'Index',
+    component: Index,
+  },
   {
     path: '/signup',
     name: 'SignUpForm',

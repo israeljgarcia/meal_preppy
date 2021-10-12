@@ -18,6 +18,18 @@ const store = createStore({
   },
 });
 
+router.beforeEach((to, from, next) => {
+  if (
+    to.name !== 'LoginForm'
+    && to.name !== 'Index'
+    && !store.authenticated
+  ) {
+    next({ name: 'LoginForm' });
+  } else {
+    next();
+  }
+});
+
 createApp(App)
   .use(router)
   .use(store)

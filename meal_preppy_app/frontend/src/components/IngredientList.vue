@@ -2,23 +2,21 @@
   <div class="container">
     <h1>Pantry List</h1>
     <hr class="heading-line" />
-    <ul v-for="ingredient in ingredients" :key="ingredient.id">
-      <div v-if="Object.keys(ingredients).length == 1"
-        class="column is-flex is-justify-content-center is-flex-direction-column
+    <div
+      v-if="Object.keys(ingredients).length == 0"
+      class="column is-flex is-justify-content-center is-flex-direction-column
         is-5 ingredient-container is-10-mobile"
+    >
+      <div
+        class="is-flex ingredient-div"
       >
-        <div
-          class="is-flex ingredient-div"
-          @click="getIngredientDetails"
-        >
-          <li class="ingredient-name">
-            No Ingredients Yet! Add one?
-          </li>
-          <span>:)</span>
-        </div>
-        <hr class="item-line" />
+        <li class="ingredient-name">
+          No Ingredients Yet! <a href="/pantry/form">Add one</a>?
+        </li>
       </div>
-
+      <hr class="item-line" />
+    </div>
+    <ul v-for="ingredient in ingredients" :key="ingredient.id">
       <div
         class="column is-flex is-justify-content-center is-flex-direction-column
         is-5 ingredient-container is-10-mobile"
@@ -52,7 +50,11 @@ export default {
     getPantryIngredients() {
       const path = 'http://localhost:8080/pantry';
       axios
-        .get(path, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
+        .get(path, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
         .then((res) => {
           this.ingredients = res.data;
           console.log(this.ingredients);
@@ -96,10 +98,8 @@ h1 {
   padding: 0;
 }
 
-.ingredient-div:hover {
-  box-shadow: 0 0 10px 3px rgb(195, 195, 195);
-  cursor: pointer;
-  border-radius: 10px;
-  padding: 0 10px;
+li {
+  list-style-type: none;
 }
+
 </style>

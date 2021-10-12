@@ -4,6 +4,7 @@ from functools import wraps
 from flask import Blueprint, json, jsonify, request, redirect, session
 from models.User import User
 from models.Shared import db
+from models.Pantry import Pantry
 from config import jwt_key
 user_blueprint = Blueprint('users', __name__)
 
@@ -46,7 +47,7 @@ def signup():
         form(json) or redirect(/home)
     """
 
-    User.signup(
+    user = User.signup(
         first_name=request.form['firstName'],
         last_name=request.form['lastName'],
         username=request.form['username'],
@@ -56,7 +57,12 @@ def signup():
 
     db.session.commit()
 
-    return redirect('http://localhost:8080/pantry')
+    print(user.id)
+    Pantry.createPantry(user.id)
+
+    db.session.commit()
+
+    return redirect('http://localhost:8080/login')
 
 
 @user_blueprint.route('/login', methods=['POST'])
