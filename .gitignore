@@ -1,2 +1,4 @@
 /meal_preppy_app/venv
 /meal_preppy_app/server/config.py
+/meal_preppy_app/server/__pycache__
+/meal_preppy_app/server/routes/__pycache__
