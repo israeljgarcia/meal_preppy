@@ -1,16 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container columns is-centered is-multiline">
     <div
-      class="recipes-div is-flex is-flex-direction-row
-is-flex-wrap-wrap is-justify-content-space-evenly"
+      class="column is-4"
+      v-for="recipie of recipes"
+      :key="recipie.id"
     >
-      <div
-        class="recipie-div"
-        v-for="recipie of recipes"
-        :key="recipie.id"
-      >
-        <Recipie @click="getRecipe" class="mb-6" :recipie="recipie" />
-      </div>
+      <Recipie @click="getRecipe" :recipie="recipie" />
     </div>
   </div>
 </template>
@@ -41,7 +36,6 @@ export default {
         })
         .then((res) => {
           this.recipes = res.data;
-          console.log(res.data);
         })
         .catch((error) => {
           console.error(error);
@@ -54,7 +48,7 @@ export default {
 };
 </script>
 <style scoped>
-.recipie-div {
-  max-width: 25vw;
-}
+  .container {
+    margin: 0 auto;
+  }
 </style>

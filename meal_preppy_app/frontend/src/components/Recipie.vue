@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-    <div class="card" >
+    <div class="card">
       <div class="card-image">
         <figure class="image is-4by3">
           <img :src="recipie.image" alt="Placeholder image" />
@@ -10,7 +9,6 @@
         <div class="media">
           <div class="media-content">
             <p class="title is-4">{{ recipie.title }}</p>
-            <p class="subtitle is-6">@johnsmith</p>
           </div>
         </div>
 
@@ -21,7 +19,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 <script>
 export default {
@@ -33,5 +30,9 @@ export default {
 p {
   max-height: 200px;
   overflow: scroll;
+}
+
+img {
+  width: 200px;
 }
 </style>

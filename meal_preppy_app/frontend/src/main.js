@@ -22,7 +22,8 @@ router.beforeEach((to, from, next) => {
   if (
     to.name !== 'LoginForm'
     && to.name !== 'Index'
-    && !store.authenticated
+    && to.name !== 'SignUpForm'
+    && !store.state.authenticated
   ) {
     next({ name: 'LoginForm' });
   } else {

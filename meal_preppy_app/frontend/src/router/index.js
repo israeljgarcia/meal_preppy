@@ -7,6 +7,7 @@ import PantryIngredientForm from '../views/PantryIngredientForm.vue';
 import LoginForm from '../views/LoginForm.vue';
 import Home from '../views/Home.vue';
 import Index from '../views/Index.vue';
+import Logout from '../views/Logout.vue';
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     path: '/login',
     name: 'LoginForm',
     component: LoginForm,
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout,
   },
   {
     path: '/recipes',

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-6">
     <div class="columns is-centered">
       <div
         class="card pt-6 pb-6 column is-4 is-10-mobile my-0 mx-auto"
@@ -74,6 +74,8 @@
                 />
               </div>
             </div>
+
+            <p class="has-text-centered">Already have an accout? <a href="/login">Log in</a>.</p>
 
             <div class="columns is-centered mt-4">
               <button

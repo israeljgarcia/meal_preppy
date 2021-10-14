@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-6">
     <div class="columns is-centered">
       <form class="card column is-10-mobile is-4 py-6">
         <h1 class="pb-6 is-size-4 has-text-weight-bold">Login</h1>
@@ -64,6 +64,7 @@ export default {
         .then((res) => {
           localStorage.setItem('token', res.data.token);
           if (res.data.token) {
+            console.log(res.data.token);
             this.$store.commit('setAuthentication', true);
             this.$router.push({ name: 'Home' });
           }
